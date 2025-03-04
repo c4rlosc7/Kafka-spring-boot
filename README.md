@@ -6,9 +6,6 @@ knowledge about Kafka using spring boot
 
 Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.
 
-
-![ComponentsKafka](material/DIAGRAM1.png)
-
 ### Broker 
 
 A broker in Apache Kafka is a server that stores, manages, and delivers messages. Brokers are the core components of the Kafka ecosystem. 
@@ -48,6 +45,10 @@ In Apache Kafka, a topic is a logical category for organizing events or messages
 > docker exec -it kafka bash
 > kafka-topics --bootstrap-server kafka:9092 --create --topic topic-test-00
 ```
+
+### Diagram
+
+![ComponentsKafka](material/DIAGRAM1.png)
 
 ## Docker Commands 
 
