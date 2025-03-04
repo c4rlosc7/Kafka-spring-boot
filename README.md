@@ -43,7 +43,7 @@ In Apache Kafka, a topic is a logical category for organizing events or messages
 ```docker
 # Create a new topic
 > docker exec -it kafka bash
-> kafka-topics --bootstrap-server kafka:9092 --create --topic topic-test-00
+> kafka-topics --bootstrap-server kafka:9092 --create --topic topic-test-00 --partitions 5 --replication-factor 1
 ```
 
 ### Diagram
