@@ -6,7 +6,7 @@ knowledge about Kafka using spring boot
 
 Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.
 
-### Broker 
+## Broker 
 
 A broker in Apache Kafka is a server that stores, manages, and delivers messages. Brokers are the core components of the Kafka ecosystem. 
 
@@ -19,7 +19,7 @@ A broker in Apache Kafka is a server that stores, manages, and delivers messages
 - Replicate partitions: Brokers replicate partitions between each other to provide redundancy
 - Handle requests: Brokers handle requests to write and read events
 
-### Topics
+## Topics
 
 In Apache Kafka, a topic is a logical category for organizing events or messages. Topics are similar to folders in a filesystem, where events are the files in that folder. 
 
@@ -59,6 +59,14 @@ In Apache Kafka, a topic is a logical category for organizing events or messages
 - --partitions **5** "partitions number"
 - --replication-factor **1** "replication number of broker"
 
+### How to update a topic
+
+```docker
+# Create a new topic
+> docker exec -it kafka bash
+> kafka-topics --bootstrap-server kafka:9092 --alter --topic topic-test-00 --partitions 10 --replication-factor 2
+```
+
 ### Diagram
 
 ![ComponentsKafka](material/DIAGRAM1.png)
@@ -85,6 +93,106 @@ Throughput is often defined in terms of records per second or megabytes (MB) per
 ### Kafka architecture
 
 Kafka's architecture is designed to handle high-throughput, low-latency event streaming. It uses a distributed, partitioned, and replicated log service provided by its brokers. 
+
+## Message
+
+A message in Apache Kafka is a unit of data that is stored as a record. A record is made up of a key, value, and timestamp. 
+
+### Message components 
+
+- Key: An optional field that can be used to identify the message and determine which partition to send it to
+- Value: The actual data payload of the message
+- Timestamp: The time at which the message was created
+
+### Message formats 
+
+- Messages can be in any format, but the most common are JSON, Avro, and string
+- Messages are stored as serialized bytes, and consumers are responsible for de-serializing them
+
+### Message delivery
+
+- Kafka offers different message delivery guarantees, including at most once, at least once, and exactly once 
+- The maximum message size that Kafka will allow is set by default to 1 MB, but this can be adjusted 
+### Message use cases 
+
+- Messages can be used to record events, such as a payment or page view, for tracking user activity and analyzing user behavior.
+
+## Producer
+
+An Apache Kafka producer is a client application that sends events to a Kafka cluster. It's a simpler concept than the consumer because it doesn't require group coordination. 
+
+### How does a Kafka producer work?
+
+- A producer serializes a message into a byte array 
+- A producer assigns a message key to determine the partition to write to 
+- A producer sends the message to a topic 
+- The broker adds a partition and offset ID to the message 
+
+### What are some features of a Kafka producer?
+
+- A producer can batch records together for efficiency 
+- A producer can automatically retry if a request fails 
+- A producer can maintain buffers of unsent records for each partition 
+- A producer can trade a small amount of additional latency for better throughput 
+
+```docker
+# Create a new producer
+> docker exec -it kafka bash
+> kafka-console-producer --bootstrap-server kafka:9092 --topic topic-test-00
+```
+
+## Consumer
+
+An Apache Kafka consumer is a client application that reads and processes data from Kafka brokers. Consumers are used by applications that need to receive messages from topics within Apache Kafka. 
+
+### How does a consumer work? 
+- A consumer issues a fetch request to a broker to get data from a partition
+- The consumer receives a chunk of log that starts with the offset position specified in the request
+- The consumer processes the records and asks for more data
+- The consumer can specify an offset to reconsume data if needed
+
+### Features of a consumer
+
+- Consumers can subscribe to multiple topics using a regular expression 
+- Consumers can perform multiple fetches in parallel 
+- Consumers can control when records are considered consumed and commit their offsets 
+- Consumers can be configured to automatically commit messages after reading them 
+
+### Related concepts 
+
+- Producers: Send messages to Kafka
+- Consumer groups: Consumers can be grouped together
+- Offsets: Track the position of a consumer
+
+```docker
+# Create a new consumer
+> docker exec -it kafka bash
+> kafka-console-consumer --bootstrap-server kafka:9092 --topic topic-test-00 --from-beginning
+--property print.key=true
+--property key.separator="-"
+```
+
+## Offset lag
+
+In Apache Kafka, offset lag is the difference between the latest available offset in a partition and the offset that a consumer group has consumed. It's a metric that indicates how far behind the consumer group is from the latest available data. 
+
+### How is offset lag calculated?
+
+- The current offset is the last committed message of the consumer for a partition. 
+- The log end offset is the highest offset in a partition, which is the offset of the last message written to that partition. 
+- The difference between the log end offset and the current offset is the consumer lag. 
+
+### Why is offset lag important? 
+
+- High offset lag indicates that consumers can't keep up with the incoming data.
+- The rate of change of consumer group lag can indicate potential problems and whether attempts to mitigate increases in lag are working.
+
+### How can offset lag be monitored?
+
+- You can monitor offset lag using the Java Client Metrics. 
+- You can use the Kafka consumer group script to see details about the consumer group performance. 
+- You can use Burrow, a monitoring solution for Kafka that provides consumer lag checking as a service. 
+
 
 ## Docker Commands 
 
