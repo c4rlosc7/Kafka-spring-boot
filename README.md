@@ -52,20 +52,16 @@ In Apache Kafka, a topic is a logical category for organizing events or messages
 # Topics describe
 > docker exec -it kafka bash
 > kafka-topics --describe --topic topic-test-00 --bootstrap-server kafka:9092
+
+# Update a topic
+> docker exec -it kafka bash
+> kafka-topics --bootstrap-server kafka:9092 --alter --topic topic-test-00 --partitions 10 --replication-factor 2
 ```
 
 - --bootstrap-server **kafka:9092** "kafka server"
 - --create --topic **topic-test-00** "name of topic to create"
 - --partitions **5** "partitions number"
 - --replication-factor **1** "replication number of broker"
-
-### How to update a topic
-
-```docker
-# Create a new topic
-> docker exec -it kafka bash
-> kafka-topics --bootstrap-server kafka:9092 --alter --topic topic-test-00 --partitions 10 --replication-factor 2
-```
 
 ### Diagram
 
