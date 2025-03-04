@@ -44,11 +44,47 @@ In Apache Kafka, a topic is a logical category for organizing events or messages
 # Create a new topic
 > docker exec -it kafka bash
 > kafka-topics --bootstrap-server kafka:9092 --create --topic topic-test-00 --partitions 5 --replication-factor 1
+
+# Topics list
+> docker exec -it kafka bash
+> kafka-topics --list --bootstrap-server kafka:9092
+
+# Topics describe
+> docker exec -it kafka bash
+> kafka-topics --describe --topic topic-test-00 --bootstrap-server kafka:9092
 ```
+
+- --bootstrap-server **kafka:9092** "kafka server"
+- --create --topic **topic-test-00** "name of topic to create"
+- --partitions **5** "partitions number"
+- --replication-factor **1** "replication number of broker"
 
 ### Diagram
 
 ![ComponentsKafka](material/DIAGRAM1.png)
+
+### Throughput
+
+Throughput in Apache Kafka is the number of messages processed in a given time period. It is a key performance metric that measures how efficient data streaming operations are. 
+
+### Why is throughput important?
+
+High throughput is important for applications that process large amounts of data quickly. 
+Throughput is often defined in terms of records per second or megabytes (MB) per second. 
+
+### How to improve throughput? 
+
+- Optimize Kafka configuration parameters
+- Increase the number of producers, partitions, and consumers
+- Tune producer configurations
+
+### Other Kafka performance metrics 
+
+- Latency: The amount of time it takes to process each message
+
+### Kafka architecture
+
+Kafka's architecture is designed to handle high-throughput, low-latency event streaming. It uses a distributed, partitioned, and replicated log service provided by its brokers. 
 
 ## Docker Commands 
 
@@ -131,8 +167,12 @@ services:
 > docker-compose down
 
 # Topics list
+> docker exec -it kafka bash
 > kafka-topics --list --bootstrap-server kafka:9092
 
+# Topics describe
+> docker exec -it kafka bash
+> kafka-topics --describe --topic topic-test-00 --bootstrap-server kafka:9092
 ```
 
 [Doccker Hub](https://hub.docker.com/_/hello-world)
