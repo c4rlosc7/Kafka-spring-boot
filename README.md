@@ -7,12 +7,47 @@ knowledge about Kafka using spring boot
 Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.
 
 
-[Kafka Official](https://kafka.apache.org)
-
+![ComponentsKafka](material/DIAGRAM1.png)
 
 ### Broker 
 
+A broker in Apache Kafka is a server that stores, manages, and delivers messages. Brokers are the core components of the Kafka ecosystem. 
 
+### What do brokers do? 
+
+- Receive messages: Brokers receive messages from producers
+- Store messages: Brokers store messages in topic partitions, which are log files
+- Deliver messages: Brokers deliver messages to consumers
+- Manage partitions: Brokers manage partitions, which are divisions of topics
+- Replicate partitions: Brokers replicate partitions between each other to provide redundancy
+- Handle requests: Brokers handle requests to write and read events
+
+### Topics
+
+In Apache Kafka, a topic is a logical category for organizing events or messages. Topics are similar to folders in a filesystem, where events are the files in that folder. 
+
+### Characteristics of topics
+
+- Append-only: New messages are added to the end of the log 
+- Immutable: Events cannot be modified after they are written 
+- Durable: Logs are stored on disk 
+- Scalable: Topics can be configured to expire data after a certain age or size 
+- Multi-producer and multi-subscriber: A topic can have multiple producers and consumers 
+
+### How topics are used
+
+- Developers use topics to hold different types of events 
+- Developers use topics to hold filtered and transformed versions of the same type of event 
+- Topics are key to publish-subscribe systems 
+- Topics act as message queues where producers publish data and consumers retrieve it 
+
+### How to create a topic
+
+```docker
+# Create a new topic
+> docker exec -it kafka bash
+> kafka-topics --bootstrap-server kafka:9092 --create --topic topic-test-00
+```
 
 ## Docker Commands 
 
@@ -77,24 +112,26 @@ services:
 
 ```docker
 # Create a new topic
-docker exec -it kafka bash
-kafka-topics --bootstrap-server kafka:9092 --create --topic topic-test-00
+> docker exec -it kafka bash
+> kafka-topics --bootstrap-server kafka:9092 --create --topic topic-test-00
 
 # Create a new producer
-docker exec -it kafka bash
-kafka-console-producer --bootstrap-server kafka:9092 --topic topic-test-00
+> docker exec -it kafka bash
+> kafka-console-producer --bootstrap-server kafka:9092 --topic topic-test-00
 
 # Create a new consumer
-docker exec -it kafka bash
-kafka-console-consumer --bootstrap-server kafka:9092 --topic topic-test-00 --from-beginning
+> docker exec -it kafka bash
+> kafka-console-consumer --bootstrap-server kafka:9092 --topic topic-test-00 --from-beginning
 
 # Run docker-compose file
-docker-compose up -d
+> docker-compose up -d
 
 # Down execute docker-compose file
-docker-compose down
+> docker-compose down
+
+# Topics list
+> kafka-topics --list --bootstrap-server kafka:9092
 
 ```
 
 [Doccker Hub](https://hub.docker.com/_/hello-world)
-
