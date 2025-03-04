@@ -73,30 +73,7 @@ In Apache Kafka, a topic is a logical category for organizing events or messages
 
 ### Diagram
 
-![ComponentsKafka](material/DIAGRAM1.png)
-
-### Throughput
-
-Throughput in Apache Kafka is the number of messages processed in a given time period. It is a key performance metric that measures how efficient data streaming operations are. 
-
-### Why is throughput important?
-
-High throughput is important for applications that process large amounts of data quickly. 
-Throughput is often defined in terms of records per second or megabytes (MB) per second. 
-
-### How to improve throughput? 
-
-- Optimize Kafka configuration parameters
-- Increase the number of producers, partitions, and consumers
-- Tune producer configurations
-
-### Other Kafka performance metrics 
-
-- Latency: The amount of time it takes to process each message
-
-### Kafka architecture
-
-Kafka's architecture is designed to handle high-throughput, low-latency event streaming. It uses a distributed, partitioned, and replicated log service provided by its brokers. 
+![ComponentsKafka](material/DIAGRAM1.png) 
 
 ## Message
 
@@ -120,6 +97,29 @@ A message in Apache Kafka is a unit of data that is stored as a record. A record
 ### Message use cases 
 
 - Messages can be used to record events, such as a payment or page view, for tracking user activity and analyzing user behavior.
+
+## Throughput
+
+Throughput in Apache Kafka is the number of messages processed in a given time period. It is a key performance metric that measures how efficient data streaming operations are. 
+
+### Why is throughput important?
+
+High throughput is important for applications that process large amounts of data quickly. 
+Throughput is often defined in terms of records per second or megabytes (MB) per second. 
+
+### How to improve throughput? 
+
+- Optimize Kafka configuration parameters
+- Increase the number of producers, partitions, and consumers
+- Tune producer configurations
+
+### Other Kafka performance metrics 
+
+- Latency: The amount of time it takes to process each message
+
+### Kafka architecture
+
+Kafka's architecture is designed to handle high-throughput, low-latency event streaming. It uses a distributed, partitioned, and replicated log service provided by its brokers.
 
 ## Producer
 
