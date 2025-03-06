@@ -2,7 +2,7 @@
 
 knowledge about Kafka using spring boot 
 
-## Apache Kafka
+<img src="material/icon-apache-kafka.png" alt="Alt Text" width="200" height="60">
 
 Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.
 
