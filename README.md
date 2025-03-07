@@ -171,9 +171,7 @@ An Apache Kafka consumer is a client application that reads and processes data f
 ```docker
 # Create a new consumer
 > docker exec -it kafka bash
-> kafka-console-consumer --bootstrap-server kafka:9092 --topic topic-test-00 --from-beginning
---property print.key=true
---property key.separator="-"
+> kafka-console-consumer --bootstrap-server kafka:9092 --topic topic-test-00 --from-beginning --property print.key=true --property key.separator="-"
 ```
 
 ## Offset lag
