@@ -4,6 +4,7 @@ import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.TopicPartition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +29,10 @@ public class DemoConsumer {
     public static void main(String[] args) {
         setProperties();
         try (Consumer<String, String> consumer = new KafkaConsumer<>(properties)){
-            consumer.subscribe(List.of(TOPIC_TEST_00));
+            // consumer.subscribe(List.of(TOPIC_TEST_00));
+            TopicPartition topicPartition = new TopicPartition(TOPIC_TEST_00, 0);
+            consumer.assign(List.of(topicPartition));
+            consumer.seek(topicPartition, 50);
             while (true) {
                 ConsumerRecords<String, String> consumerRecords = consumer.poll(Duration.ofMillis(100));
                 for (ConsumerRecord<String, String> consumerRecord: consumerRecords) {

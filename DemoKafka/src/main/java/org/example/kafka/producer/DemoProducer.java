@@ -25,8 +25,8 @@ public class DemoProducer {
         setProperties();
         long startTime = System.currentTimeMillis();
         try (Producer<String, String> producer = new KafkaProducer<>(properties)){
-            for (int i = 0; i < 10; i++) {
-                producer.send(new ProducerRecord<>(TOPIC_TEST_00, String.valueOf(i), String.valueOf(i)));
+            for (int i = 0; i < 100; i++) {
+                producer.send(new ProducerRecord<>(TOPIC_TEST_00, "carlos-key", String.valueOf(i)));
             }
             producer.flush();
         }
